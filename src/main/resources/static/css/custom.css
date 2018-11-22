@@ -1,0 +1,178 @@
+/* .jumbotron {
+	background: linear-gradient(45deg, #add7e4 0%, #27738c 100%);
+	position: relative;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 3px, rgba(0, 0, 0, 0.075) 0px
+		0px 30px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 7px inset, rgba(0, 0, 0, 0.2) 0px
+		-3px 7px inset;
+	padding: 5px 0px;
+}
+ */
+/* hr {
+	border: none;
+	border-left: 1px solid hsla(200, 10%, 50%, 100);
+	height: 23vh;
+	width: 1px;
+} */
+/* 
+.customBtn {
+	color: rgb(255, 255, 255);
+	width: 100px;
+	text-align: right;
+	margin-top: 15px;
+}
+
+.width10px {
+	width: 10px;
+}
+ */
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+./* search {
+  width: 100%;
+  position: relative
+  margin-bottom: 50px;
+}
+
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 3px solid #2c96a5;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+  color: #1f5056;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  position: absolute;  
+  right: -50px;
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #2c96a5;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+Resize the wrap to see the search bar change!
+.wrap{
+  width: 30%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+.content-title{
+	font-size: 20px;
+    font-weight: bold;
+    color: gray
+}
+#content-box{
+   /*  background: beige; */
+    /* font-style: oblique; */
+    font-size: 15px;
+/*     margin-left: 645px;
+ */}
+.text {
+  position: relative;
+  font-size: 14px;
+  color: black;
+  width: 250px; /* Could be anything you like. */
+}
+
+.text-concat {
+  position: relative;
+  display: inline-block;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
+  line-height: 1.2em;
+  text-align:justify;
+}
+
+.text.ellipsis::after {
+  content: "...";
+  position: absolute;
+  right: -12px; 
+  bottom: 4px;
+}
+/* .logout{
+	margin-right: 95px;
+    font-weight: bold;
+    font-size: 13px;
+	
+} */
+/* .button {
+    background-color: #e67d68;
+    border: none;
+    color: white;
+    padding: 3px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; Safari
+    transition-duration: 0.4s;
+    font-size: 12px;
+}
+
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+ */
+/*************************** Pagination start *******************************/
+.center {
+    text-align: center;
+}
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #1b85a7;
+    color: white;}
+/*************************** Pagination end *******************************/
+
+
+/*************************** Generate Serial No Start *******************************/
+body {
+    /* Set "my-sec-counter" to 0 */
+    counter-reset: my-sec-counter;
+}
+
+b.serialnumber::before {
+    /* Increment "my-sec-counter" by 1 */
+    counter-increment: my-sec-counter;
+    content: " " counter(my-sec-counter) ". ";
+    font-size: 14px;
+}
+
+/*************************** Generate Serial No End *******************************/

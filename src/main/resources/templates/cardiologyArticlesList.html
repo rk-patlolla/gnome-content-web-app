@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data">
+<head>
+<title>Gnome-content-search</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 	 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <!-- <link rel="stylesheet" href="/css/custom.css"> -->
+
+	
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> -->
+<style>
+/* p {
+	width: 900px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 15px;
+} */
+
+.resultMsg {
+	color: red;
+	font-size: 13px;
+	margin-top: 40px;
+}
+
+b.tblColumnSize {
+	font-size: 12px;
+}
+
+td.td-title {
+	font-family: serif;
+    font-weight: bold;
+    color: #343a40;
+    font-size: 15px;
+}
+
+td.td-article {
+	font-family: -webkit-pictograph;
+    color: #ad850d;
+    font-weight: bold;
+}
+td.td-values {
+	font-family: -webkit-pictograph;
+}
+
+#search-box {
+	margin-top: 50px;
+	margin-left: 760px;
+}
+.mainContent{
+    background-color: #f8f9fa;
+    font-size: 15px;
+}
+
+th.heading{
+text-align: center;
+background-color: #343a40;
+color: #f8f9fa;;
+}
+
+.pagination {
+   
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #1e7e34;
+    border-color: #1e7e34;
+}
+thead{
+    text-align: center;
+    background-color: #343a40;
+    color: white;
+}
+a{
+color: #ffffff;
+}
+</style>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">
+			<!--  <img class="logo"
+			src=""
+			height="40"> --> GNOME CONTENT
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbar1" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbar1">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a th:href="@{/getArticlesList}"
+					class="nav-link" style="font-variant-caps: all-petite-caps;">View
+						Articles</a></li>
+				<li class="nav-item"><a th:href="@{/getCardiologyArticles}"
+					class="nav-link" style="font-variant-caps: all-petite-caps;">Cardiology</a></li>
+
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}"><button
+							class="btn ml-2 btn-warning">Logout</button></a></li>
+			</ul>
+		</div>
+	</nav>
+	<div th:if="${not #lists.isEmpty(myForm)}" style="float: right;">
+		<table style="font-variant-caps: all-petite-caps; margin-right: 35px;"
+			class="">
+			<tbody>
+				<tr th:each="user : ${myForm}">
+					<td>Welcome :</td>
+					<td th:text="${user.firstName}"></td>
+					<td th:text="${user.lastName}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<hr>
+	<div th:if="${not #lists.isEmpty(page)}" class="table-responsive">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Pmid</th>
+					<th>Journal Title</th>
+					<th>ArticleTitle</th>
+					<th>Authers</th>
+					<th>Published Date</th>
+					<th>PublicationStatus</th>
+					<th>Keywords</th>
+					<th>AbstarctText</th>
+					<th>FullText Url</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="row : ${page}">
+					<th scope="row" th:text="${row.pmid}"></th>
+					<td th:text="${row.journalTitle}"></td>
+					<td th:text="${row.articleTitle}"></td>
+					<td th:text="${row.authers}"></td>
+					<td th:text="${row.publishedDate}"></td>
+					<td th:text="${row.publicationStatus}"></td>
+					<td th:text="${row.keywords}"></td>
+					<td><button type="button" class="btn btn-success" data-toggle="modal" th:attr="data-target='#abstractText'+${row.pmid}">View</button>
+
+						<div class="modal fade" th:id="'abstractText'+${row.pmid}" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLongTitle"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLongTitle">Abstract Text</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p th:text="${row.abstarctText}"></p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										
+									</div>
+								</div>
+							</div>
+						</div></td>
+					<td><button type="button" class="btn btn-success" data-toggle="modal" th:attr="data-target='#abstractTextUrl'+${row.pmid}">View</button>
+
+						<div class="modal fade" th:id="'abstractTextUrl'+${row.pmid}" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLongTitle"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLongTitle">Article Full Text Url</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<a th:href="${row.articleTextUrl}" th:text="${row.articleTextUrl}" target="_blank" style="color:#007bff;" ></a>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										
+									</div>
+								</div>
+							</div>
+						</div></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div sd:pagination-summary="">info</div>
+			</div>
+			<div class="col-sm-6">
+				<nav class="pull-right">
+					<ul class="pagination" sd:pagination="full">
+						<!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+						<li class="disabled"><a href="#" aria-label="Previous"><span
+								aria-hidden="true">&laquo;</span></a></li>
+						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Gnome-content</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+#search-box {
+	margin-top: 50px;
+	
+}
+</style>
+</head>
+<body>
+<!-- 	<div class="jumbotron jumbotron-fluid">
+		<div class="container" align="left">
+			<h4>GNOME-CONTENT</h4>
+			<div class="logout" align="right">
+				<a th:href="@{/logout}" style="text-decoration: none; color: white;">Logout</a>
+			</div>
+		</div>
+
+		<div th:if="${not #lists.isEmpty(myForm)}" align="center">
+			<table style="font-variant-caps: all-petite-caps;">
+				<tbody>
+					<tr th:each="user : ${myForm}">
+						<td>Welcome :</td>
+						<td th:text="${user.firstName}"></td>
+						<td th:text="${user.lastName}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div th:if="${not #lists.isEmpty(contentObj)}" class="search">
+		<div th:each="data : ${contentObj}">
+			
+			<form action="#" th:action="@{/updateRank}" th:object="${searchForm}" method="POST">
+				<input type="hidden" name="rankId" th:value="${data.id}">
+				<input type="text" class="searchTerm"  name="rank" th:value="${data.rank}">
+				<button class="button button2">Update</button>
+ 				</form>
+			</div>
+		</div>
+	<div align="center">
+		<a th:href="@{/getArticles}">Back to view Articles</a>
+	</div> -->
+			
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="#"> <img class="logo" src="http://bootstrap-ecommerce.com/main/images/logo-white.png" height="40"> GNOME CONTENT</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar1">
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item"><div th:if="${not #lists.isEmpty(myForm)}">
+		<table style="font-variant-caps: all-petite-caps;" class="nav-link">
+			<tbody>
+				<tr th:each="user : ${myForm}">
+					<td>Welcome : </td>
+					<td th:text="${user.firstName}"></td>
+					<td th:text="${user.lastName}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div></li> 
+	<li class="nav-item">
+<a class="nav-link" th:href="@{/logout}"><button class="btn ml-2 btn-warning">Logout</button></a></li> 
+    </ul>
+  </div>
+</nav>
+<div th:if="${not #lists.isEmpty(contentObj)}" class="search">
+		<div th:each="data : ${contentObj}">
+	<div class="container" id="search-box" align="center">
+<form action="#" th:action="@{/updateRank}" th:object="${searchForm}" method="POST">
+	<div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container"> 
+                <div class="input-group stylish-input-group">
+                	<input type="hidden" name="rankId" th:value="${data.id}">
+                    <input type="text" class="form-control"  name="rank" th:value="${data.rank}" >
+                    <span class="input-group-addon">
+                        <button type="submit" class="btn btn-info">Update</button>           
+                    </span>
+                </div>
+            </div>
+        </div>
+	</div>
+  </form>
+</div>
+	</div></div><br><br><br>
+	<div align="center">
+		<a th:href="@{/getArticles}" class="btn btn-primary" >Back to view Articles</a>
+	</div> 
+			
+</body>
+</html>
