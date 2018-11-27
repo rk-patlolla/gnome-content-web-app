@@ -138,7 +138,10 @@ function getArticles(){
 		<div class="collapse navbar-collapse" id="navbar1">
 			<ul class="navbar-nav ml-auto">
 			<li class="nav-item"><a th:href="@{/getArticlesList}" class="nav-link" style="font-variant-caps: all-petite-caps;">View Articles</a></li>
-			<li class="nav-item"><a th:href="@{/getCardiologyArticles}" class="nav-link" style="font-variant-caps: all-petite-caps;">Cardiology</a></li>
+			<!-- <li class="nav-item"><a th:href="@{/getUmlsArticlesByKeyword}" class="nav-link" style="font-variant-caps: all-petite-caps;">Cardiology</a></li>
+			<li class="nav-item"><a th:href="@{/getCardiologyArticles}" class="nav-link" style="font-variant-caps: all-petite-caps;">Cardiology-2</a></li> -->
+			<li class="nav-item"><a th:href="@{/getUmlsPhraseArticles}" class="nav-link" style="font-variant-caps: all-petite-caps;">Cardiology</a></li>
+			<li class="nav-item"><a th:href="@{/getExcelPhraseArticles}" class="nav-link" style="font-variant-caps: all-petite-caps;">Cardiology-2</a></li>
 				<!-- <li class="nav-item"><div th:if="${not #lists.isEmpty(myForm)}">
 						<table style="font-variant-caps: all-petite-caps;"
 							class="nav-link">
@@ -171,7 +174,7 @@ function getArticles(){
 	<br><hr>
 <!-- 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark"> --><div style="float: right;margin-right: 35px;">
   <form class="form-inline" action="#" th:action="@{/searchArticles}" th:object="${searchForm}" method="POST">
-    <input class="form-control mr-sm-2" type="text" th:field="*{searchTerm}" placeholder="Search">
+    <input class="form-control mr-sm-2" type="text" th:field="*{searchTerm}" placeholder="Search" required="required">
     <button class="btn btn-success" type="submit">Search</button>
   </form>
   </div>

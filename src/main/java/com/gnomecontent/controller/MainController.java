@@ -36,6 +36,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gnomecontent.dao.AppUserDAO;
 import com.gnomecontent.documents.PubmedArticles;
+import com.gnomecontent.documents.PubmedExcelPhraseQuery;
+import com.gnomecontent.documents.PubmedUmlsKeywords;
+import com.gnomecontent.documents.PubmedUmlsPhraseQuery;
 import com.gnomecontent.entity.AppRole;
 import com.gnomecontent.entity.AppUser;
 import com.gnomecontent.entity.ContentSearchForm;
@@ -221,7 +224,7 @@ public class MainController {
 		
 		return "pubmedArticlesList";
 	}
-	@RequestMapping(value="/searchArticles",method = RequestMethod.POST)
+	@RequestMapping(value="/searchArticles")
 	public String getArticles(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
 		AppUserForm myForm = getConnetionForm(request);
 		Page<PubmedArticles> aList = pubService.getArticlesBySearch(searchForm.getSearchTerm(),pageable);
@@ -241,4 +244,82 @@ public class MainController {
 		
 		return "cardiologyArticlesList";
 	}
+	
+	@RequestMapping(value="/getUmlsArticlesByKeyword")
+	public String getUmlsArticlesByKeyword(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
+		AppUserForm myForm = getConnetionForm(request);
+		Page<PubmedUmlsKeywords> aList = pubService.getUmlsArticlesByKeyword(pageable);
+		model.addAttribute("myForm", myForm);
+		model.addAttribute("searchForm", new ContentSearchForm());
+		model.addAttribute("page",aList);
+		
+		return "cardiologyUmlsArticlesList";
+	}
+	@RequestMapping(value="/getArticlesByKeyword")
+	public String getArticlesByKeyword(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
+		AppUserForm myForm = getConnetionForm(request);
+		Page<Pubmed> aList = pubService.getArticlesByKeyword(searchForm.getSearchTerm(),pageable);
+		model.addAttribute("myForm", myForm);
+		model.addAttribute("searchForm", new ContentSearchForm());
+		model.addAttribute("page",aList);
+		
+		return "cardiologyArticlesList";
+	}
+	
+	@RequestMapping(value="/searchUmlArticlesByKeyword")
+	public String searchUmlArticlesByKeyword(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
+		AppUserForm myForm = getConnetionForm(request);
+		Page<PubmedUmlsKeywords> aList = pubService.searchByUmlKeyword(searchForm.getSearchTerm(),pageable);
+		model.addAttribute("myForm", myForm);
+		model.addAttribute("searchForm", new ContentSearchForm());
+		model.addAttribute("page",aList);
+		
+		return "cardiologyUmlsArticlesList";
+	}
+	
+	@RequestMapping(value="/getUmlsPhraseArticles")
+	public String getUmlsPhraseArticles(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
+		AppUserForm myForm = getConnetionForm(request);
+		Page<PubmedUmlsPhraseQuery> aList = pubService.getUmlsPhraseArticles(pageable);
+		model.addAttribute("myForm", myForm);
+		model.addAttribute("searchForm", new ContentSearchForm());
+		model.addAttribute("page",aList);
+		
+		return "umlsPhraseArticlesList";
+		
+		
+	}
+	@RequestMapping(value="/getExcelPhraseArticles")
+	public String getExcelPhraseArticles(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
+		AppUserForm myForm = getConnetionForm(request);
+		Page<PubmedExcelPhraseQuery> aList = pubService.getExcelPhraseArticles(pageable);
+		model.addAttribute("myForm", myForm);
+		model.addAttribute("searchForm", new ContentSearchForm());
+		model.addAttribute("page",aList);
+		
+		return "excelPhraseArticlesList";
+	}
+	
+	@RequestMapping(value="/searchUmlPhraseArticles")
+	public String searchUmlPhraseArticles(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
+		AppUserForm myForm = getConnetionForm(request);
+		Page<PubmedUmlsPhraseQuery> aList = pubService.searchUmlsPhraseArticles(searchForm.getSearchTerm(),pageable);
+		model.addAttribute("myForm", myForm);
+		model.addAttribute("searchForm", new ContentSearchForm());
+		model.addAttribute("page",aList);
+		
+		return "umlsPhraseArticlesList";
+	}
+	@RequestMapping(value="/searchExcelPhraseArticles")
+	public String searchExcelPhraseArticles(@ModelAttribute("searchForm") ContentSearchForm searchForm,Model model, Pageable pageable,WebRequest request){
+		AppUserForm myForm = getConnetionForm(request);
+		Page<PubmedExcelPhraseQuery> aList = pubService.searchExcelPhraseArticles(searchForm.getSearchTerm(),pageable);
+		model.addAttribute("myForm", myForm);
+		model.addAttribute("searchForm", new ContentSearchForm());
+		model.addAttribute("page",aList);
+		
+		return "excelPhraseArticlesList";
+	}
+	
+	
 }
